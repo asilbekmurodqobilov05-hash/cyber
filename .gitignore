@@ -1,2 +1,11 @@
 # Google App Engine generated folder
 appengine-generated/
+
+# Local dependencies and build artifacts
+node_modules/
+.next/
+tsconfig.tsbuildinfo
+
+# Local environment overrides
+.env.local
+.env.*.local
