@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 function buildPageUrl(basePath: string, searchParams: URLSearchParams, page: number) {
@@ -29,16 +28,8 @@ export function DirectoryPagination({
         Page {page} of {totalPages}
       </p>
       <div className="flex gap-3">
-        {page > 1 ? (
-          <Link href={buildPageUrl("/alumni", params, page - 1)}>
-            <Button variant="secondary">Previous</Button>
-          </Link>
-        ) : null}
-        {page < totalPages ? (
-          <Link href={buildPageUrl("/alumni", params, page + 1)}>
-            <Button>Next page</Button>
-          </Link>
-        ) : null}
+        {page > 1 ? <Button href={buildPageUrl("/alumni", params, page - 1)} variant="secondary">Previous</Button> : null}
+        {page < totalPages ? <Button href={buildPageUrl("/alumni", params, page + 1)}>Next page</Button> : null}
       </div>
     </div>
   );

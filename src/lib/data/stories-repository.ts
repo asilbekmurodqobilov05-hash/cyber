@@ -3,7 +3,7 @@ import { hasSupabaseEnv } from "@/lib/supabase/config";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Story } from "@/types";
 
-export async function getStories() {
+export async function getStories(): Promise<Story[]> {
   if (!hasSupabaseEnv()) {
     return stories;
   }
@@ -19,20 +19,20 @@ export async function getStories() {
       return stories;
     }
 
-    return data.map((story) => ({
+    const mappedStories: Story[] = data.map((story) => ({
       id: story.id,
       slug: story.slug,
       title: story.title,
       excerpt: story.excerpt,
-      content: story.content.split("
-
-").filter(Boolean),
+      content: story.content.split("\n\n").filter(Boolean),
       imageUrl: story.image_url ?? stories[0].imageUrl,
       author: "Oxford Editorial",
       authorRole: "School Newsroom",
       createdAt: story.created_at,
       readTime: "4 min read",
-    })) satisfies Story[];
+    }));
+
+    return mappedStories;
   } catch {
     return stories;
   }

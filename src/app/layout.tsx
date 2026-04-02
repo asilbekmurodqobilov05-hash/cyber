@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import "@/app/globals.css";
 import { SiteShell } from "@/components/layout/site-shell";
 import { ToasterProvider } from "@/components/providers/toaster-provider";
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   description: "Connecting graduates and celebrating achievement through a premium alumni platform.",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
       <body>

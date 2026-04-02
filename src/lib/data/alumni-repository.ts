@@ -24,7 +24,7 @@ export async function getFeaturedAlumni() {
   return items.filter((item) => item.featured).slice(0, 3);
 }
 
-export async function getAllAlumni() {
+export async function getAllAlumni(): Promise<AlumniProfile[]> {
   if (!hasSupabaseEnv()) {
     return alumniProfiles;
   }
@@ -50,7 +50,7 @@ export async function getAllAlumni() {
       return alumniProfiles;
     }
 
-    return data.map((entry) => ({
+    const mappedProfiles: AlumniProfile[] = data.map((entry) => ({
       id: entry.user_id,
       slug: String(entry.user_id),
       name: entry.users?.[0]?.name ?? "Oxford Alumni",
@@ -61,7 +61,9 @@ export async function getAllAlumni() {
       location: entry.location ?? "Oxford Global Network",
       achievements: entry.achievements ?? [],
       socials: Array.isArray(entry.socials) ? entry.socials : [],
-    })) satisfies AlumniProfile[];
+    }));
+
+    return mappedProfiles;
   } catch {
     return alumniProfiles;
   }
